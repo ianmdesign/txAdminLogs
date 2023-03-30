@@ -1,10 +1,10 @@
 
 fx_version 'cerulean'
-games { 'gta5' }
+games { 'gta5', 'rdr3' }
 
-author 'Joost#5866'
-description 'txAdmin Logs'
-version '1.0.5'
+author 'Ian McClellan'
+description 'txAdmin Discord Logs'
+version '2.0.0'
 
 server_only "yes"
 
