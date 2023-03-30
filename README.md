@@ -1,7 +1,7 @@
 # txAdminLogs
-Simple Standalone txAdmin Logs made for FiveM
+Simple Standalone txAdmin Discord Logs made for FiveM
 
-This is an updated version of jhag01's [txAdminLogs](https://github.com/jhag01/txAdminLogs) project, made compatible with txAdmin version 5.2.0. Here are some of the key changes that have been made:
+This is an updated version of jhag01's [txAdminLogs](https://github.com/jhag01/txAdminLogs) project, made compatible with txAdmin version 5.2.0. The project works by watching [txAdminEvents](https://github.com/tabarra/txAdmin/blob/master/docs/events.md) and pushes them to discord via webhook. Here are some of the key changes that have been made:
 
 - Updated the fxmanifest.lua file to use the games function instead of game, as required by txAdmin 5.2.0, along with other additions made to support txAdmin Events.
 - Updated the readme.md file to include more detailed instructions and information about the modifications made to the original project.
