@@ -24,7 +24,6 @@ AddEventHandler('txAdmin:events:playerWarned', function(eventData) --Log Warned 
 end)
 
 AddEventHandler('txAdmin:events:playerBanned', function(eventData) --Log Banned Player
-
     local playername = eventData.targetName
     local author = eventData.author
     local reason = eventData.reason
@@ -32,6 +31,23 @@ AddEventHandler('txAdmin:events:playerBanned', function(eventData) --Log Banned 
     local exp = eventData.expiration
     local targetIds = eventData.targetIds
     local kickmessage = eventData.kickMessage
+
+    -- Extract IDs from targetIds
+    local steamId, licenseId, discordId, fivemId, license2Id = nil, nil, nil, nil, nil
+    for _, id in ipairs(targetIds) do
+        if string.sub(id, 1, 6) == "steam:" then
+            steamId = string.sub(id, 7)
+        elseif string.sub(id, 1, 8) == "license:" then
+            licenseId = string.sub(id, 9)
+        elseif string.sub(id, 1, 8) == "discord:" then
+            discordId = string.sub(id, 9)
+        elseif string.sub(id, 1, 6) == "fivem:" then
+            fivemId = string.sub(id, 7)
+        elseif string.sub(id, 1, 9) == "license2:" then
+            license2Id = string.sub(id, 10)
+        end
+    end
+
     if not exp then
         exp = 'Permanent Ban'
     else
@@ -39,9 +55,20 @@ AddEventHandler('txAdmin:events:playerBanned', function(eventData) --Log Banned 
     end 
 
     local message = "Name: **" .. playername .. "** \nAuthor: **" .. author .. "** \nReason: **" .. reason .. "**\nID: **" .. id .. "**\nExpires: **" .. exp .. "**"
-    if targetIds then
-        local targetIdsString = table.concat(targetIds, ", ")
-        message = message .. "\nTarget IDs: **" .. targetIdsString .. "**"
+    if steamId then
+        message = message .. "\nSteam ID: **" .. steamId .. "**"
+    end
+    if licenseId then
+        message = message .. "\nLicense ID: **" .. licenseId .. "**"
+    end
+    if discordId then
+        message = message .. "\nDiscord ID: **" .. discordId .. "**"
+    end
+    if fivemId then
+        message = message .. "\nFiveM ID: **" .. fivemId .. "**"
+    end
+    if license2Id then
+        message = message .. "\nLicense 2 ID: **" .. license2Id .. "**"
     end
 
     if kickmessage then
@@ -49,11 +76,9 @@ AddEventHandler('txAdmin:events:playerBanned', function(eventData) --Log Banned 
     end
     
     sendToDiscord('Player Banned', message, 16711680)
-
 end)
 
 AddEventHandler('txAdmin:events:actionRevoked', function(eventData) --Log Unbanned Player
-
     local type = eventData.actionType
     local playername = eventData.playerName
     local author = eventData.actionAuthor
@@ -62,10 +87,39 @@ AddEventHandler('txAdmin:events:actionRevoked', function(eventData) --Log Unbann
     local targetIds = eventData.playerIds
     local revokeAuthor = eventData.revokedBy
 
-    local message = "Name: **" .. playername .. "** \nAction Author: **" .. author .. "** \nReason: **" .. reason .. "**\nID: **" .. id .. "**"
+    -- Extract IDs from targetIds
+    local steamId, licenseId, discordId, fivemId, license2Id = nil, nil, nil, nil, nil
     if targetIds then
-        local targetIdsString = table.concat(targetIds, ", ")
-        message = message .. "\nTarget IDs: **" .. targetIdsString .. "**"
+        for _, id in ipairs(targetIds) do
+            if string.sub(id, 1, 6) == "steam:" then
+                steamId = string.sub(id, 7)
+            elseif string.sub(id, 1, 8) == "license:" then
+                licenseId = string.sub(id, 9)
+            elseif string.sub(id, 1, 8) == "discord:" then
+                discordId = string.sub(id, 9)
+            elseif string.sub(id, 1, 6) == "fivem:" then
+                fivemId = string.sub(id, 7)
+            elseif string.sub(id, 1, 9) == "license2:" then
+                license2Id = string.sub(id, 10)
+            end
+        end
+    end
+
+    local message = "Name: **" .. playername .. "** \nAction Author: **" .. author .. "** \nReason: **" .. reason .. "**\nID: **" .. id .. "**"
+    if steamId then
+        message = message .. "\nSteam ID: **" .. steamId .. "**"
+    end
+    if licenseId then
+        message = message .. "\nLicense ID: **" .. licenseId .. "**"
+    end
+    if discordId then
+        message = message .. "\nDiscord ID: **" .. discordId .. "**"
+    end
+    if fivemId then
+        message = message .. "\nFiveM ID: **" .. fivemId .. "**"
+    end
+    if license2Id then
+        message = message .. "\nLicense 2 ID: **" .. license2Id .. "**"
     end
 
     if revokeAuthor then
@@ -79,7 +133,6 @@ AddEventHandler('txAdmin:events:actionRevoked', function(eventData) --Log Unbann
 end)
 
 AddEventHandler('txAdmin:events:actionRevoked', function(eventData) --Log Revoked Warning
-
     local type = eventData.actionType
     local playername = eventData.playerName
     local author = eventData.actionAuthor
@@ -88,10 +141,39 @@ AddEventHandler('txAdmin:events:actionRevoked', function(eventData) --Log Revoke
     local targetIds = eventData.playerIds
     local revokeAuthor = eventData.revokedBy
 
-    local message = "Name: **" .. playername .. "** \nAction Author: **" .. author .. "** \nReason: **" .. reason .. "**\nID: **" .. id .. "**"
+    -- Extract IDs from targetIds
+    local steamId, licenseId, discordId, fivemId, license2Id = nil, nil, nil, nil, nil
     if targetIds then
-        local targetIdsString = table.concat(targetIds, ", ")
-        message = message .. "\nTarget IDs: **" .. targetIdsString .. "**"
+        for _, id in ipairs(targetIds) do
+            if string.sub(id, 1, 6) == "steam:" then
+                steamId = string.sub(id, 7)
+            elseif string.sub(id, 1, 8) == "license:" then
+                licenseId = string.sub(id, 9)
+            elseif string.sub(id, 1, 8) == "discord:" then
+                discordId = string.sub(id, 9)
+            elseif string.sub(id, 1, 6) == "fivem:" then
+                fivemId = string.sub(id, 7)
+            elseif string.sub(id, 1, 9) == "license2:" then
+                license2Id = string.sub(id, 10)
+            end
+        end
+    end
+
+    local message = "Name: **" .. playername .. "** \nAction Author: **" .. author .. "** \nReason: **" .. reason .. "**\nID: **" .. id .. "**"
+    if steamId then
+        message = message .. "\nSteam ID: **" .. steamId .. "**"
+    end
+    if licenseId then
+        message = message .. "\nLicense ID: **" .. licenseId .. "**"
+    end
+    if discordId then
+        message = message .. "\nDiscord ID: **" .. discordId .. "**"
+    end
+    if fivemId then
+        message = message .. "\nFiveM ID: **" .. fivemId .. "**"
+    end
+    if license2Id then
+        message = message .. "\nLicense 2 ID: **" .. license2Id .. "**"
     end
 
     if revokeAuthor then

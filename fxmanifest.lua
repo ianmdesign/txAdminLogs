@@ -4,7 +4,7 @@ games { 'gta5', 'rdr3' }
 
 author 'Ian McClellan'
 description 'txAdmin Discord Logs'
-version '2.0.0'
+version '2.1.0'
 
 server_only "yes"
 
